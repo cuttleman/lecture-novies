@@ -18,14 +18,13 @@ const Poster = styled.Image`
   height: 100%;
 `;
 
-const styles = {
-  position: "absolute",
-  height: HEIGHT / 1.4,
-  width: WIDTH / 1.2,
-};
-
-export default ({ loading, results, nextPage }) => {
+export default ({ loading, results, nextPage, dimension }) => {
   const [topIndex, setTopIndex] = useState(0);
+  const styles = {
+    position: "absolute",
+    width: dimension.w / 1.2,
+    height: dimension.h / 1.4,
+  };
   const nextCard = () => setTopIndex((currentIndex) => currentIndex + 1);
   const position = new Animated.ValueXY();
   const panResponder = PanResponder.create({
