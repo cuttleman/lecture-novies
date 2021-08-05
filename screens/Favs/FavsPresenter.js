@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { Dimensions, PanResponder, Animated } from "react-native";
+import { PanResponder, Animated } from "react-native";
 import { apiImage } from "../../api";
-
-const { width: WIDTH, height: HEIGHT } = Dimensions.get("window");
 
 const Container = styled.View`
   flex: 1;
@@ -18,14 +16,13 @@ const Poster = styled.Image`
   height: 100%;
 `;
 
-const styles = {
-  position: "absolute",
-  height: HEIGHT / 1.4,
-  width: WIDTH / 1.2,
-};
-
-export default ({ loading, results, nextPage }) => {
+export default ({ loading, results, nextPage, dimensions }) => {
   const [topIndex, setTopIndex] = useState(0);
+  const styles = {
+    position: "absolute",
+    width: dimensions.w / 1.2,
+    height: dimensions.h / 1.4,
+  };
   const nextCard = () => setTopIndex((currentIndex) => currentIndex + 1);
   const position = new Animated.ValueXY();
   const panResponder = PanResponder.create({
@@ -40,14 +37,14 @@ export default ({ loading, results, nextPage }) => {
       if (dx >= 200) {
         Animated.spring(position, {
           toValue: {
-            x: WIDTH + 100,
+            x: dimensions.w + 100,
             y: dy,
           },
         }).start(nextCard);
       } else if (dx <= -200) {
         Animated.spring(position, {
           toValue: {
-            x: -WIDTH - 100,
+            x: -dimensions.w - 100,
             y: dy,
           },
         }).start(nextCard);
