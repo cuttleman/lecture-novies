@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppLoading } from "expo";
+import AppLoading from "expo-app-loading";
 import { Image, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { Asset } from "expo-asset";

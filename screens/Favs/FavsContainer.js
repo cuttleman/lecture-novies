@@ -3,8 +3,9 @@ import { Dimensions, Platform } from "react-native";
 import { movieApi } from "../../api";
 import FavsPresenter from "./FavsPresenter";
 
+const { width, height } = Dimensions.get("window");
+
 export default () => {
-  const { width, height } = Dimensions.get("window");
   const [dimensions, setDimensions] = useState({ w: width, h: height });
   const [movies, setMovies] = useState({
     loading: true,
@@ -26,13 +27,13 @@ export default () => {
   useEffect(() => {
     if (Platform.OS === "web") {
       window.addEventListener("resize", () => {
-        setDimensions({ w: innerWidth, h: innerHeight });
+        setDimensions({ w: window.innerWidth, h: window.innerHeight });
       });
-      return () =>
-        window.removeEventListener("resize", () => {
-          setDimensions({ w: innerWidth, h: innerHeight });
-        });
     }
+    return () =>
+      window.removeEventListener("resize", () => {
+        setDimensions({ w: window.innerWidth, h: window.innerHeight });
+      });
   }, []);
   return (
     <FavsPresenter {...movies} nextPage={setPage} dimensions={dimensions} />

@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components/native";
 import Loaded from "../../components/Loaded";
 import Poster from "../../components/Poster";
-import { ScrollView, Dimensions, Platform, Linking } from "react-native";
+import { ScrollView, Dimensions } from "react-native";
 import { apiImage } from "../../api";
 import { format, trimText } from "../../utils";
 import ContentsTitle from "../../components/ContentsTitle";
-import YoutubePlayer from "react-native-youtube-iframe";
 import Vote from "../../components/Vote";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -163,20 +162,6 @@ export default ({ loading, result, openUrlFn }) => {
               </TouchableOpacity>
             </DataContent>
           )}
-          {(result.videos?.results?.length > 0 && Platform.OS === "ios") ||
-            (Platform.OS === "android" && (
-              <DataContent>
-                <ContentsTitle title={"예고편"} />
-                <YoutubePlayer
-                  height={200}
-                  width={300}
-                  videoId={result.videos.results[0].key}
-                  onError={(e) => console.log(e)}
-                  volume={40}
-                  playbackRate={1}
-                />
-              </DataContent>
-            ))}
         </Data>
       </Container>
     </Loaded>
